@@ -8,7 +8,7 @@ app.listen(process.env.PORT, (req, res) =>{
     console.log("server is running at 3000")
 })
 
-const url = "mongodb://localhost:27017";
+const url = "mongodb+srv://goodcoder:1082018mgmg@cluster0.h6blw.mongodb.net/?retryWrites=true&w=majority";
 let db;
 MongoClient.connect(url, (err, client) =>{
     if(err) throw err
