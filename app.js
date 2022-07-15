@@ -15,8 +15,8 @@ MongoClient.connect(url, (err, client) =>{
     db = client.db('aplus');
 })
 
-app.get('/api/shoplist', (req, res) =>{
-    db.collection('shoplist').find().toArray((err, result) =>{
+app.get('/api/shoplists', (req, res) =>{
+    db.collection('shoplists').find().toArray((err, result) =>{
         res.status(200).json(result)
     })
 })
