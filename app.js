@@ -27,8 +27,8 @@ MongoClient.connect(url, (err, client) =>{
 
 // get shop category
 
-app.get('/api/shoplists/:category', (req, res) =>{
-    const category = req.params.category;
+app.get('/api/shoplists/:category', async (req, res) =>{
+    const category = await req.params.category;
     
     if(category === "bakey"){
         db.collection('shoplists').find({"category": "bakey"}).toArray((err, result) =>{
