@@ -60,8 +60,8 @@ app.get('/api/shoplists/:category', async (req, res) =>{
 
 // get singel shop
 
-app.get('/api/shoplists/:id', (req, res) =>{
-    const id = req.params.id;
+app.get('/api/shoplists/:id', async (req, res) =>{
+    const id = await req.params.id;
 
     db.collection('shoplists').findOne({_id: ObjectId(id)})
     .then((result) =>{
@@ -71,8 +71,8 @@ app.get('/api/shoplists/:id', (req, res) =>{
 
 // add new shop
 
-app.post('/api/shoplists', (req, res) =>{
-    const data = req.body;
+app.post('/api/shoplists', async (req, res) =>{
+    const data = await req.body;
     db.collection('shoplists').insertOne(data)
     .then((result) =>{
         res.status(201).json(result)
@@ -81,8 +81,8 @@ app.post('/api/shoplists', (req, res) =>{
 
 // add new menu for shop
 
-app.patch('/api/shoplists/:id/:method', (req, res) =>{
-    const id = req.params.id;
+app.patch('/api/shoplists/:id/:method', async (req, res) =>{
+    const id = await req.params.id;
     const method = req.params.method;
     const data = req.body;
 
