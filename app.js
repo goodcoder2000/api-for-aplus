@@ -14,15 +14,15 @@ app.use(cors({
 }));
 
 
-app.listen(process.env.PORT, (req, res) =>{
-    console.log("server is running at 3000")
+app.listen(process.env.PORT, async (req, res) =>{
+  await console.log("server is running at 3000")
 })
 
 const url = "mongodb+srv://goodcoder:1082018mgmg@cluster0.h6blw.mongodb.net/?retryWrites=true&w=majority";
 let db;
-MongoClient.connect(url, (err, client) =>{
+MongoClient.connect(url, async (err, client) =>{
     if(err) throw err
-    db = client.db('aplus');
+    db = await client.db('aplus');
 })
 
 // get shop category
@@ -83,8 +83,8 @@ app.post('/api/shoplists', async (req, res) =>{
 
 app.patch('/api/shoplists/:id/:method', async (req, res) =>{
     const id = await req.params.id;
-    const method = req.params.method;
-    const data = req.body;
+    const method =await req.params.method;
+    const data =await req.body;
 
     if(method === "push"){
         db.collection('shoplists').updateOne({_id: ObjectId(id)}, {$addToSet: {menu: data}})
