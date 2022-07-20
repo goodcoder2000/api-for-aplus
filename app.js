@@ -94,3 +94,11 @@ app.patch('/api/shoplists/:id/:method', async (req, res) =>{
     }
 })
 
+//image slider
+
+app.get('/api/imageslider', (req, res) =>{
+    db.collection('imageslider').find().toArray((err, result) =>{
+        res.status(200).json(result)
+    })
+})
+
