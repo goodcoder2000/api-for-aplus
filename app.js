@@ -2,7 +2,6 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const { ObjectId } = require('mongodb');
-const { relativeTimeThreshold } = require('moment');
 const MongoClient = require("mongodb").MongoClient;
 const app = express();
 
@@ -99,6 +98,7 @@ app.patch('/api/shoplists/:id/:method', async (req, res) =>{
 
 app.get('/api/imageslider', (req, res) =>{
     db.collection('imageslider').find().toArray((err, result) =>{
+        if(err) throw err
         res.status(200).json(result)
     })
 })
