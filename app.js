@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const { ObjectId } = require('mongodb');
+const { relativeTimeThreshold } = require('moment');
 const MongoClient = require("mongodb").MongoClient;
 const app = express();
 
@@ -102,3 +103,23 @@ app.get('/api/imageslider', (req, res) =>{
     })
 })
 
+
+//all user 
+
+app.get('/api/users', (req, res) =>{
+    db.collection('users').find().toArray((err, result) =>{
+        if(err) throw err
+        
+        res.status(200).json(result)
+    })
+})
+
+app.get('/api/users/:id', async (req, res) =>{
+    const id = await req.params.id;
+
+    db.collection('users').findOne({_id: ObjectId(id)})
+    .then((result) =>{
+        res.status(200).json(result)
+    })
+    .catch(err => res.status(500).json(err))
+})
