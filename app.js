@@ -102,3 +102,23 @@ app.get('/api/imageslider', (req, res) =>{
         res.status(200).json(result)
     })
 })
+
+// all users
+
+app.get('/api/users', (req, res) =>{
+    db.collection('users').find().toArray((err, result) =>{
+        if(err) throw err
+        res.status(200).json(result)
+    } )
+})
+
+//single users
+
+app.get('/api/users/:id', async (req, res) =>{
+    const id = await req.params.id;
+    db.collection('users').findOne({_id: ObjectId(id)})
+    .then(result => res.status(200).json(result))
+    .catch(err => res.status(500).json({err: err}))
+})
+
+
