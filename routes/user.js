@@ -25,10 +25,10 @@ router.post('/register', (req, res) =>{
         if(!result){
             db.collection('users').insertOne(data)
             .then((result) => { 
-                res.status(201).json(result)
+                res.status(201).json({message: "register success"})
             })
         }   else {
-            res.status(201).json({error: "This Phone has already Exits"})
+            res.status(201).json({message: "This Phone has already Exits"})
         }
     })
 
