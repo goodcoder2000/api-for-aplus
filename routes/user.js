@@ -80,7 +80,7 @@ router.patch('/:id/:method/', async(req, res) =>{
     if(method === "push"){
         db.collection('users').updateOne({_id: ObjectId(id)}, {$addToSet: {cart: data}})
         .then(result =>{
-            res.status(200).json(result)
+            res.status(200).json({message: 'add to cart success'})
         })
     }
 })
