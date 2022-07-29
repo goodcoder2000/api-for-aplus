@@ -71,6 +71,20 @@ router.get('/:id', async (req, res) =>{
     .catch(err => res.status(500).json({err: err}))
 })
 
+//
+
+router.patch('/:id/:method/', async(req, res) =>{
+    const id  = await req.params.id;
+    const method = await req.params.method;
+    const data = await req.body;
+    if(method === "push"){
+        db.collection('users').updateOne({_id: ObjectId(id)}, {$addToSet: {cart: data}})
+        .then(result =>{
+            res.status(200).json(result)
+        })
+    }
+})
+
 
 
 module.exports = router;
